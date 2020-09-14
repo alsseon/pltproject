@@ -61,5 +61,12 @@ public class ManufacControllerImpl implements ManufacController{
 			manufacservice.deleteesti(no);
 			ModelAndView mav = new ModelAndView("redirect:/manufacpage/estilist.do");
 			return mav;
-		} 
+		}
+		@RequestMapping(value = {"/manufacpage/estilist_updatestatus.do"}, method = RequestMethod.GET)
+		public ModelAndView updatestatus(@RequestParam("quotestatus") int quotestatus, @RequestParam("no") int no, HttpServletRequest request, HttpServletResponse response)throws Exception{
+			request.setCharacterEncoding("utf-8");
+			manufacservice.updatestatus(quotestatus,no);
+			ModelAndView mav = new ModelAndView("redirect:/manufacpage/estilist.do");
+			return mav;
+		}
 }
