@@ -37,4 +37,22 @@
 	<delete id="deleteesti" parameterType="int">
         delete from quotation q where no=#{no}
     </delete>
+    <update id = "upstatus_esti_ing" parameterType = "int">
+    	<![CDATA[
+	     update quotation
+	     set quotestatus=1
+	     where
+	     no=#{no}
+      ]]>
+     
+    </update>
+        <update id = "upstatus_esti_com" parameterType = "int">
+    	<![CDATA[
+	     update quotation
+	     set quotestatus=2
+	     where
+	     no=#{no}
+      ]]>
+     
+    </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.myspring.cindy.manufacPage.controller;
 
+import java.net.InetAddress;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,16 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.cindy.manufacPage.controller.ManufacController;
 import com.myspring.cindy.manufacPage.service.ManufacService;
-import com.myspring.cindy.startuppage.vo.PageVO;
 import com.myspring.cindy.manufacPage.vo.ManufacVO;
+import com.myspring.cindy.startuppage.vo.PageVO;
 
 @Controller("manufaccontroller")
 public class ManufacControllerImpl implements ManufacController{
@@ -25,7 +24,7 @@ public class ManufacControllerImpl implements ManufacController{
 		private ManufacService manufacservice;
 		@Autowired
 		private ManufacVO manufac;
-		@RequestMapping(value = {"/manufacpage/estilist.do","/manufacpage/prodlist.do","/manufacpage/estilist_more_w.do","/manufacpage/estilist_more_ing.do","/manufacpage/estilist_more_de.do" },method = RequestMethod.GET)
+		@RequestMapping(value = {"/manufacpage/estilist.do","/manufacpage/prodlist.do","/manufacpage/estilist_more_w.do","/manufacpage/estilist_more_ing.do","/manufacpage/estilist_more_de.do","/com_manufacpage/com_estilist.do" },method = RequestMethod.GET)
 		private ModelAndView prodlist(PageVO pagevo, @RequestParam(value="nowPage", required = false)String nowPage, @RequestParam(value  = "cntPerPage", required = false)String cntPerPage, HttpServletRequest request, HttpServletResponse response) throws Exception{
 			
 				request.setCharacterEncoding("utf-8");
@@ -51,6 +50,7 @@ public class ManufacControllerImpl implements ManufacController{
 				mav.addObject("estilist",estilist);
 				mav.addObject("pagevo",pagevo);
 				System.out.println("estiList: "+estilist);
+		
 				
 				return mav;
 		}
@@ -67,6 +67,8 @@ public class ManufacControllerImpl implements ManufacController{
 			request.setCharacterEncoding("utf-8");
 			manufacservice.updatestatus(quotestatus,no);
 			ModelAndView mav = new ModelAndView("redirect:/manufacpage/estilist.do");
+	
 			return mav;
+			
 		}
 }

@@ -15,4 +15,6 @@ public interface ManufacService {
 
 	int deleteesti(int no) throws Exception;
 
+	int updatestatus(int quotestatus, int no);
+
 }

@@ -39,4 +39,7 @@ public class ManufacServiceImpl implements ManufacService{
 		public int deleteesti(int no) throws Exception {
 			return manufacdao.deleteesti(no);
 		}
+		public int updatestatus(int quotestatus, int no)throws DataAccessException{
+			return manufacdao.quotestatus(quotestatus,no);
+		}
 }

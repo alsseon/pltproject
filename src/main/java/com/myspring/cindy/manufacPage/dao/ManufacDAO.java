@@ -20,4 +20,8 @@ public interface ManufacDAO {
 
 	int deleteesti(int no) throws DataAccessException;
 
+	
+
+	int quotestatus(int quotestatus, int no) throws DataAccessException;
+
 }

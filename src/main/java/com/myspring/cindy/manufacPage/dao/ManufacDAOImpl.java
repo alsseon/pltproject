@@ -18,30 +18,41 @@ public class ManufacDAOImpl implements ManufacDAO{
 		@Override
 		public int listCount() throws DataAccessException{
 			int listCount = sqlSession.selectOne("mapper.manufacpage.listCount");
-			System.out.println(listCount);
+			
 			return listCount;
 		}
 		@Override
 		public List<ManufacVO> selectAllEstiList(PageVO pagevo) throws DataAccessException{
-			System.out.println("dao 실행?");
+			;
 			List<ManufacVO> estiList = null;
 			estiList = sqlSession.selectList("mapper.manufacpage.selectAllEstilist",pagevo);
-			System.out.println("dao:"+estiList);
+			
 			return estiList;
 		}
 		@Override
 		public List<ManufacVO> selectAllProdList(PageVO pagevo) throws DataAccessException{
-			System.out.println("dao 실행?");
+			
 			List<ManufacVO> prodList = null;
 			prodList = sqlSession.selectList("mapper.manufacpage.selectAllProdlist",pagevo);
-			System.out.println("dao:"+prodList);
+			
 			return prodList;
 		}
 		@Override
 		public int deleteesti(int no) throws DataAccessException {
 			int deleteesti = sqlSession.delete("mapper.manufacpage.deleteesti", no);
-			System.out.println("del" + deleteesti);
+			
 			return deleteesti;
 		}
-
+		@Override
+		public int quotestatus(int quotestatus, int no) throws DataAccessException{
+			int result = 0;
+			if (quotestatus == 0) {
+				result = sqlSession.update("mapper.manufacpage.upstatus_esti_ing",no); //누르면 진행중으로 업데이트
+				System.out.println("dao result" + result);
+			}else if(quotestatus == 1) {
+				result = sqlSession.update("mapper.manufacpage.upstatus_esti_com",no);//완료로 업데이트ㄴ
+			}
+			return result;
+		}
+		
 }
