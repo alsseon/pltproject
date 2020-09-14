@@ -80,7 +80,7 @@
        <tbody>
           <c:forEach var="manu_esti" items="${estilist}" >     
                <tr align="center">
-               <c:if test = "${manu_esti.quotestatus==0}">
+               <c:if test = "${manu_esti.quotestatus==1}">
                <td><a href="#">${manu_esti.compname}</a></td>
                <td><fmt:formatDate value="${manu_esti.reqquote}" pattern="yy-MM-dd  kk:MM"/></td>
                <td><button type="button" class="btn btn-outline-secondary" onclick="del(${no})">철회</button></td>

@@ -25,7 +25,7 @@ public class ManufacControllerImpl implements ManufacController{
 		private ManufacService manufacservice;
 		@Autowired
 		private ManufacVO manufac;
-		@RequestMapping(value = {"/manufacpage/estilist.do","/manufacpage/prodlist.do","/manufacpage/estilist_more_w.do" },method = RequestMethod.GET)
+		@RequestMapping(value = {"/manufacpage/estilist.do","/manufacpage/prodlist.do","/manufacpage/estilist_more_w.do","/manufacpage/estilist_more_ing.do" },method = RequestMethod.GET)
 		private ModelAndView prodlist(PageVO pagevo, @RequestParam(value="nowPage", required = false)String nowPage, @RequestParam(value  = "cntPerPage", required = false)String cntPerPage, HttpServletRequest request, HttpServletResponse response) throws Exception{
 			
 				request.setCharacterEncoding("utf-8");
@@ -40,6 +40,7 @@ public class ManufacControllerImpl implements ManufacController{
 				}else if(cntPerPage == null) {
 					cntPerPage = "10";
 				}
+				System.out.println(nowPage);
 				pagevo = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 				List<ManufacVO> prodlist = manufacservice.listprod(pagevo);
 //				List<ManufacVO> conlist = manufacservice.listcon(pagevo);
@@ -48,6 +49,7 @@ public class ManufacControllerImpl implements ManufacController{
 				mav.addObject("prodlist",prodlist);
 //				mav.addObject("conlist",conlist);
 				mav.addObject("estilist",estilist);
+				mav.addObject("pagevo",pagevo);
 				System.out.println("estiList: "+estilist);
 				
 				return mav;
