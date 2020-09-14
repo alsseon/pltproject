@@ -25,7 +25,7 @@ public class ManufacControllerImpl implements ManufacController{
 		private ManufacService manufacservice;
 		@Autowired
 		private ManufacVO manufac;
-		@RequestMapping(value = {"/manufacpage/estilist.do","/manufacpage/prodlist.do","/manufacpage/estilist_more_w.do","/manufacpage/estilist_more_ing.do" },method = RequestMethod.GET)
+		@RequestMapping(value = {"/manufacpage/estilist.do","/manufacpage/prodlist.do","/manufacpage/estilist_more_w.do","/manufacpage/estilist_more_ing.do","/manufacpage/estilist_more_de.do" },method = RequestMethod.GET)
 		private ModelAndView prodlist(PageVO pagevo, @RequestParam(value="nowPage", required = false)String nowPage, @RequestParam(value  = "cntPerPage", required = false)String cntPerPage, HttpServletRequest request, HttpServletResponse response) throws Exception{
 			
 				request.setCharacterEncoding("utf-8");

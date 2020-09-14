@@ -138,7 +138,7 @@
           </tr>
         </c:forEach>   
    </table>
-   <a href = "#">더보기</a>
+   <a href = "${contextPath}/manufacpage/estilist_more_de.do">더보기</a>
 </div> 
      <script src="${contextPath}/resources/js/jquery.min.js"></script>
        <script src="${contextPath}/resources/js/jquery-migrate-3.0.1.min.js"></script>
