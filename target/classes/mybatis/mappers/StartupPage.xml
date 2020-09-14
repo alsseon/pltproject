@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "mapper.startuppage">
+	<select id="selectAllEstilist" resultType="startuppagevo">
+		<![CDATA[
+			select manuname,quotestatus, reqquote from 
+			(select m.manuname, q.quotestatus, q.reqquote, row_number() over(order by q.reqquote desc) as rnum 
+			from quotation q, manufacturer m
+			where m.id = q.manuid) MP 
+			WHERE RNUM BETWEEN #{start} AND #{end} ORDER BY reqquote DESC 
+		]]>
+	</select>
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		  FROM quotation
+	]]>
+	</select>
+	<select id="selectAllProdlist" resultType="startuppagevo">
+		<![CDATA[
+			select manuname,orderstatus, reqorder from 
+			(select m.manuname, 
+            p.orderstatus, 
+            p.reqorder, row_number() 
+            over(order by p.reqorder desc)
+            as rnum 
+			from production p, manufacturer m
+			where m.id = p.manuid) MP 
+			WHERE RNUM BETWEEN #{start} AND #{end} ORDER BY reqorder DESC 
+		]]>
+	</select>
+	<select id="selectAllConlist" resultType="startuppagevo">
+		<![CDATA[
+			select expname,status, reqdate from 
+			(select e.expname, 
+            c.status, 
+            c.reqdate, row_number() 
+            over(order by c.reqdate desc)
+            as rnum 
+			from consulting c, expert e
+			where e.id = c.expid) MP 
+			WHERE RNUM BETWEEN #{start} AND #{end} ORDER BY reqdate DESC 
+		]]>
+	</select>
+</mapper>

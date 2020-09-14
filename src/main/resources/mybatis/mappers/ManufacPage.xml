@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "mapper.manufacpage">
+	<select id="selectAllEstilist" resultType="manufacvo">
+		<![CDATA[
+			select compname,quotestatus, reqquote, no from 
+			(select s.compname, q.quotestatus, q.reqquote, q.no, row_number() over(order by q.reqquote desc) as rnum 
+			from quotation q, startup s
+			where s.id = q.compid) MP 
+			WHERE RNUM BETWEEN #{start} AND #{end} ORDER BY reqquote DESC 
+		]]>
+	</select>
+		<select id="listCount" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		  FROM quotation
+	]]>
+	</select>
+	<select id="selectAllProdlist" resultType="manufacvo">
+		<![CDATA[
+			select compname,orderstatus, reqorder from 
+			(select s.compname, p.orderstatus, p.reqorder, row_number() over(order by p.reqorder desc) as rnum 
+			from production p, startup s
+			where s.id = p.compid) MP 
+			WHERE RNUM BETWEEN #{start} AND #{end} ORDER BY reqorder DESC 
+		]]>
+	</select>
+	<select id="listCount_pro" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		  FROM production
+	]]>
+	</select>
+	<delete id="deleteesti" parameterType="int">
+        delete from quotation q where no=#{no}
+    </delete>
+</mapper>
